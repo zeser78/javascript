@@ -36,7 +36,7 @@ console.log(styles); //return an object with all the css peroperties
 
 // Manipulating Classes
 const todo = document.querySelector(".todo");
-//setAtribute => replace the class
+//setAtribute => replace the class, help you to get dynamic attributes on tags or svg
 todo.setAttribute("class", "done");
 // classList
 todo.classList.remove("done");
