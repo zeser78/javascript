@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script type="application/javascript"></script>
+
+    <style>
+      /* #cw {
+        position: fixed;
+        z-index: -1;
+      } */
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- example from https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage -->
+    <canvas id="canvas" width="150" height="150"></canvas>
+    <canvas id="myCanvas" width="250" height="250"></canvas>
+    <canvas id="mySvg"></canvas>
+    <canvas id="mySvg2"></canvas>
+    <canvas id="canvasSave"></canvas>
+    <canvas id="canvasAnimation" width="300" height="300"></canvas>
+    <canvas id="cw" width="300" height="300"></canvas>
+    <!-- <canvas
+      id="canvasBall"
+      style="border: 1px solid "
+      width="600"
+      height="300"
+    ></canvas> -->
+    <canvas id="canvasPixel" width="600" height="300"></canvas>
+    <div id="color" style="width:200px;height:50px;float:left"></div>
+    <input id="grayscalebtn" value="Grayscale" type="button">
+    <input id="invertbtn" value="Invert" type="button">
+  </div>
+    <script>
+      function drawInitial() {
+        var canvas = document.getElementById("canvas");
+        if (canvas.getContext) {
+          var ctx = canvas.getContext("2d");
+
+          ctx.fillStyle = "rgb(200, 0, 0)";
+          ctx.fillRect(0, 10, 50, 50);
+
+          ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+          ctx.fillRect(30, 30, 50, 50);
+
+          ctx.fillRect(25, 25, 100, 100);
+          ctx.clearRect(45, 45, 60, 60);
+          ctx.strokeRect(50, 50, 50, 50);
+        }
+      }
+
+      drawInitial();
+      function drawPath() {
+        var canvas = document.getElementById("myCanvas");
+        if (canvas.getContext) {
+          var ctx = canvas.getContext("2d");
+
+          var rect = new Path2D();
+          rect.rect(10, 10, 50, 50);
+
+          var circle = new Path2D();
+          circle.moveTo(125, 35);
+          circle.arc(100, 35, 25, 0, 2 * Math.PI);
+
+          ctx.stroke(rect);
+          ctx.fill(circle);
+        }
+      }
+      drawPath();
+      var canvas = document.getElementById("mySvg");
+      var ctx = canvas.getContext("2d");
+
+      var p = new Path2D("M10 10 h 80 v 80 h -80 Z");
+      ctx.fill(p);
+
+      function drawSvg() {
+        var ctx = document.getElementById("mySvg2").getContext("2d");
+        // for (var i = 0; i < 6; i++) {
+        //   for (var j = 0; j < 6; j++) {
+        //     ctx.fillStyle =
+        //       "rgb(" +
+        //       Math.floor(255 - 42.5 * i) +
+        //       ", " +
+        //       Math.floor(255 - 42.5 * j) +
+        //       ", 0)";
+        //     ctx.fillRect(j * 25, i * 25, 25, 25);
+        //   }
+        // }
+        // draw background
+        ctx.fillStyle = "#FD0";
+        ctx.fillRect(0, 0, 75, 75);
+        ctx.fillStyle = "#6C0";
+        ctx.fillRect(75, 0, 75, 75);
+        ctx.fillStyle = "#09F";
+        ctx.fillRect(0, 75, 75, 75);
+        ctx.fillStyle = "#F30";
+        ctx.fillRect(75, 75, 75, 75);
+        ctx.fillStyle = "#FFF";
+
+        // set transparency value
+        ctx.globalAlpha = 0.1;
+
+        // Draw semi transparent circles
+        for (var i = 0; i < 7; i++) {
+          ctx.beginPath();
+          ctx.arc(75, 75, 10 + 10 * i, 0, Math.PI * 2, true);
+          ctx.fill();
+        }
+      }
+      drawSvg();
+      function drawSave() {
+        var ctx = document.getElementById("canvasSave").getContext("2d");
+
+        //     ctx.fillRect(0, 0, 150, 150); // Draw a rectangle with default settings
+        //     ctx.save(); // Save the default state
+
+        //     ctx.fillStyle = "#09F"; // Make changes to the settings
+        //     ctx.fillRect(15, 15, 120, 120); // Draw a rectangle with new settings
+
+        //     ctx.save(); // Save the current state
+        //     ctx.fillStyle = "#FFF"; // Make changes to the settings
+        //     ctx.globalAlpha = 0.5;
+        //     ctx.fillRect(30, 30, 90, 90); // Draw a rectangle with new settings
+
+        //     ctx.restore(); // Restore previous state
+        //     ctx.fillRect(45, 45, 60, 60); // Draw a rectangle with restored settings
+
+        //     ctx.restore(); // Restore original state
+        //     ctx.fillRect(60, 60, 30, 30); // Draw a rectangle with restored settings
+        //   }
+
+        for (var i = 0; i < 3; i++) {
+          for (var j = 0; j < 3; j++) {
+            ctx.save();
+            ctx.fillStyle = "rgb(" + 51 * i + ", " + (255 - 51 * i) + ", 255)";
+            ctx.translate(10 + j * 50, 10 + i * 50);
+            ctx.fillRect(0, 0, 25, 25);
+            ctx.restore();
+          }
+        }
+      }
+
+      drawSave();
+// var img = new Image();
+// img.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg";
+// var canvas = document.getElementById("canvasPixel");
+// var ctx = canvas.getContext("2d");
+// img.onload = function() {
+//   ctx.drawImage(img, 0, 0);
+//   img.style.display = "none";
+// };
+// var color = document.getElementById("color");
+// function pick(event) {
+//   var x = event.layerX;
+//   var y = event.layerY;
+//   var pixel = ctx.getImageData(x, y, 1, 1);
+//   var data = pixel.data;
+//   var rgba =
+//     "rgba(" +
+//     data[0] +
+//     ", " +
+//     data[1] +
+//     ", " +
+//     data[2] +
+//     ", " +
+//     data[3] / 255 +
+//     ")";
+//   color.style.background = rgba;
+//   color.textContent = rgba;
+// }
+// canvas.addEventListener("mousemove", pick);
+    </script>
+    <script src="./script-mdn.js"></script>
+    <script src="./script-mouse.js"></script>
+    <!-- <script src="./ball.js"></script> -->
+    <script src="./canvas-pixel.js"></script>
+  </body>
+</html>

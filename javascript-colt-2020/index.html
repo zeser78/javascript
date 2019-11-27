@@ -4,23 +4,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <style>
+      .todo {
+        font-size: 2rem;
+        color: blue;
+      }
+      .done {
+        text-decoration: line-through;
+        color: chartreuse;
+      }
+    </style>
   </head>
   <body>
-    <button>Don't click me</button>
-    <div>
-      <h1>Testing the DOM</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, illum
-        temporibus aut at ab ratione? Sit, excepturi quae error illum vel beatae
-        voluptas dolores mollitia accusantium nemo nulla ad soluta.
-      </p>
+    <section>
+      <button>Don't click me</button>
+      <div>
+        <h1>Testing the DOM</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, illum
+          temporibus aut at ab ratione? Sit, excepturi quae error illum vel
+          beatae voluptas dolores mollitia accusantium nemo nulla ad soluta.
+        </p>
 
-      <ul>
-        <li>Tennis</li>
-        <li>Soccer</li>
-        <li>Baseball</li>
-      </ul>
-    </div>
+        <ul>
+          <li class="todo">Tennis</li>
+          <li class="todo">Soccer</li>
+          <li class="todo">Baseball</li>
+        </ul>
+      </div>
+    </section>
     <!-- <script src="function_hof.js"></script> -->
     <script src="example-dom.js"></script>
   </body>
