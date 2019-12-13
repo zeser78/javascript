@@ -1,3 +1,5 @@
+// From MDN using canvas and svg
+
 var canvas = document.getElementById("canvasBall");
 var ctx = canvas.getContext("2d");
 
