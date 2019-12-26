@@ -62,7 +62,7 @@ fetch("https://financialmodelingprep.com/api/v3/stock/real-time-price")
       throw new Error(`Status Code Error: ${response.status}`);
     } else {
       response.json().then(data => {
-        console.log(data);
+        console.log(data.length);
         console.log(data.stockList.length);
 
         // for (let stock of data.stockList) {
